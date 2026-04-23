@@ -4,10 +4,10 @@
 
 ```
 MedicalDA05_semi2/
-├── app.py                         ← 이 파일 실행
-├── model.py                       
+├── app 파일 이름.py           ← 이 파일 실행
+├── model.py                  ← 파일 이름 model.py로 유지해야 실행됨
 ├── saved_models/
-│   └── KLUEBERT_Dataset1/         ← 모델 저장된 폴더
+│   └── KLUEBERT_Dataset1/    ← 모델 저장된 폴더
 │       ├── config.json
 │       ├── model.safetensors
 │       ├── tokenizer_config.json
@@ -48,7 +48,7 @@ $env:OPENAI_API_KEY = "공유드린키"
 ### 3단계: streamlit 실행
 
 ```bash
-streamlit run app.py
+streamlit run "app 파일 이름".py
 ```
 
 

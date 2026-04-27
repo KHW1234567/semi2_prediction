@@ -1,0 +1,9 @@
+﻿Model,Dataset,Val_Acc,Val_Loss,Val_F1,Test_Acc,Test_Loss,Test_F1,save_dir
+KLUBERT,Dataset1,0.861,0.6308,0.8672,0.8649,0.6118,0.87,./saved_models\KLUBERT_Dataset1
+KLUBERT,Dataset2,0.8751,0.5429,0.8779,0.8661,0.6313,0.87,./saved_models\KLUBERT_Dataset2
+KLUBERT,Dataset3,0.8359,0.5784,0.8377,0.8345,0.5083,0.8369,./saved_models\KLUBERT_Dataset3
+KLUBERT,Dataset4,0.8672,0.5801,0.8677,0.8657,0.5446,0.8665,./saved_models\KLUBERT_Dataset4
+KOELECTRA,Dataset1,0.8893,0.7399,0.8909,0.8909,0.7182,0.8921,./saved_models\KOELECTRA_Dataset1
+KOELECTRA,Dataset2,0.8863,0.621,0.8886,0.8849,0.715,0.8869,./saved_models\KOELECTRA_Dataset2
+KOELECTRA,Dataset3,0.8229,0.6711,0.8226,0.8301,0.6031,0.8306,./saved_models\KOELECTRA_Dataset3
+KOELECTRA,Dataset4,0.8572,0.6798,0.8583,0.8584,0.5825,0.8595,./saved_models\KOELECTRA_Dataset4

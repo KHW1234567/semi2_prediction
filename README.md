@@ -41,23 +41,34 @@
 
 ---
 
-## 🤖 모델링 및 평가 결과 (Modeling & Performance)
+## 🤖 모델링 및 최종 모델 선정 (Modeling & Evaluation)
 
-### 1. 사용 모델
-* **KLUE-BERT-base**: 한국어 언어 이해에 특화된 BERT 모델로 다중 감정 분류에 적합
-* **KoELECTRA-base-v3**: Discriminator 구조 기반으로 한국어 비격식 텍스트 분류 성능이 우수
+### 1. 실험 설계 및 후보 모델
+* **KLUE-BERT-base** 및 **KoELECTRA-base-v3** 두 가지 언어 모델을 선정하였습니다.
+* 가공된 4개의 데이터셋(Dataset 1 ~ 4) 각각에 대해 10 Epoch 동안 훈련을 진행하여 검증 성능을 비교하였습니다.
+* 특정 감정에 과적합되는 것을 막고, 예측 확률의 신뢰도를 확보하기 위해 **검증 손실값 (Validation Loss, Val Loss)**을 최종 모델 선정의 핵심 지표로 보았습니다.
 
-### 2. 불균형 클래스 보정 (Class Weights)
-* 특정 감정이나 일상 발화에 예측이 쏠리지 않도록 훈련 데이터셋 분포의 역수(Inverse Frequency)를 이용한 클래스 가중치(Class Weights)를 Loss 함수(CrossEntropyLoss)에 반영하여 학습 성능 개선
+### 2. 모델별 실험 결과 (10 Epoch 기준)
 
-### 3. 최종 평가 지표 (Epoch 10)
+#### A. KLUE-BERT 성능표
+| 데이터셋 | 검증 정확도 (Val Acc) | 검증 손실 (Val Loss) | 검증 F1 (Val F1) | 테스트 F1 (Test F1) |
+| :--- | :---: | :---: | :---: | :---: |
+| Dataset 1 | 86.39% | 0.6305 | 86.89% | 86.31% |
+| **Dataset 2 (최종 선정)** | **87.42%** | **0.6074** | **87.76%** | **86.90%** |
+| Dataset 3 | 83.53% | 0.5660 | 83.53% | 83.33% |
+| Dataset 4 | 86.58% | 0.5522 | 86.75% | 85.86% |
 
-| 모델명 | 데이터셋 | 검증 정확도 (Val Acc) | 테스트 F1-Score (Test F1) | 저장 폴더 |
-| :--- | :---: | :---: | :---: | :--- |
-| **KoELECTRA** | **Dataset 1** | **90.77%** | **90.95%** | `saved_models/KoELECTRA_Dataset1` |
-| **KoELECTRA** | **Dataset 2** | **89.28%** | **88.93%** | `saved_models/KoELECTRA_Dataset2` |
-| **KLUE-BERT** | **Dataset 2** | **87.42%** | **86.90%** | `saved_models/KLUBERT_Dataset2` |
-| **KLUE-BERT** | **Dataset 4** | **86.58%** | **85.86%** | `saved_models/KLUBERT_Dataset4` |
+#### B. KoELECTRA 성능표
+| 데이터셋 | 검증 정확도 (Val Acc) | 검증 손실 (Val Loss) | 검증 F1 (Val F1) | 테스트 F1 (Test F1) |
+| :--- | :---: | :---: | :---: | :---: |
+| Dataset 1 | 89.26% | 0.7323 | 89.52% | 88.68% |
+| Dataset 2 | 87.63% | 0.7337 | 87.99% | 86.71% |
+| Dataset 3 | 83.68% | 0.6598 | 83.65% | 82.80% |
+| Dataset 4 | 83.90% | 0.6428 | 84.09% | 84.18% |
+
+### 3. 최종 모델 선정 결과: 🏆 KLUE-BERT (Dataset 2)
+* **선정 사유**: 두 모델 모두 Dataset 2에서 높은 정확도와 균형 잡힌 F1-Score를 보였으나, **검증 손실값(Validation Loss)** 비교 시 KoELECTRA(Val Loss: `0.7337`)에 비해 **KLUE-BERT(Val Loss: 0.6074)**가 훨씬 낮게 조율되어 안정적인 예측 성능과 일반화 성능을 입증하였습니다.
+* 따라서 가장 안정적이고 오차율이 적은 **KLUE-BERT (Dataset 2)** 모델을 최종 챗봇의 감정 분류 및 우울 예측 엔진으로 선정하여 적용하였습니다.
 
 ---
 
